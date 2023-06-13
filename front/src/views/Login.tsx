@@ -5,6 +5,12 @@ import LoginAPI from "../api/Login";
 
 export default function Login() {
   
+  let validacao = window.localStorage.getItem('id')
+
+  if (validacao){
+    window.location.href = '/dashboard'
+  }
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 

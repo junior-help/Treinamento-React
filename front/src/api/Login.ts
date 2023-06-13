@@ -1,5 +1,6 @@
 // import axios from "axios";
 // import Dashboard from "../views/Dashboard";
+import DB from "../model/DB";
 
 export default function LoginAPI(email: string, password: string) {
     // let dados = {
@@ -18,41 +19,24 @@ export default function LoginAPI(email: string, password: string) {
     //         });
     // }
 
-    let dados = Dados();
-    let res = []
+    let dados = DB();
+    let res = false
 
     for (let i = 0; i < dados.length; i++) {
         if (dados[i].email == email) {
-            res.push({
-                status: 200,
-                email: dados[i].email
-            })
-            break;
+            if (dados[i].senha == password) {
+                window.localStorage.setItem('id', dados[i].id)
+                res = true
+                break;
+            }else{
+                alert('Senha Incorreta')
+            }
         }
     }
-}
 
-
-
-export function Dados() {
-    return [
-        {
-            id: 1,
-            name: 'Matheus',
-            email: 'matheus@gmail.com',
-            senha: '1234'
-        },
-        {
-            id: 2,
-            name: 'JR',
-            email: 'jr@gmail.com',
-            senha: '12345'
-        },
-        {
-            id: 3,
-            name: 'Vitor',
-            email: 'vitor@gmail',
-            senha: '123456'
-        }
-    ]
+    if (res) {
+        window.location.href = '/dashboard'
+    } else {
+        alert('Email não existe')
+    }
 }

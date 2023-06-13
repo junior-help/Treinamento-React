@@ -1,4 +1,4 @@
-export default function Dashboard(dados:Object){
+export default function Dashboard(){
     return(
         <>
             <p>oi</p>
